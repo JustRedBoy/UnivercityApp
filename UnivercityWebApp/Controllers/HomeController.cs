@@ -4,6 +4,7 @@ using System.Diagnostics;
 using UnivercityWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using UnivercityWebApp.ViewModels;
 
 namespace UnivercityWebApp.Controllers
 {
