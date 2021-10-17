@@ -22,6 +22,8 @@
         Lab,
         RGR,
         Module,
+        IndividualWork,
+        Essay,
         ExtraWork,
         Stage // for course work
     }
