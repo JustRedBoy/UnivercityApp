@@ -5,6 +5,8 @@
         public int Id { get; set; }
         public string Position { get; set; }
 
+        public int ApplicationUserId { get; set; }
+
         public ApplicationUser GeneralInfo { get; set; }
     }
 }

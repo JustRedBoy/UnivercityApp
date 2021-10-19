@@ -9,7 +9,7 @@ namespace UnivercityWebApp.Models
         public string Name { get; set; }
 
         public int DirectionId { get; set; }
-        public int CuratorId { get; set; }
+        public int TeacherId { get; set; }
 
         public List<Student> Students { get; set; }
         public Direction Direction { get; set; }

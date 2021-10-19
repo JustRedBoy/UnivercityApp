@@ -11,7 +11,7 @@ namespace UnivercityWebApp.Models
 
         public int AbstractWorkId { get; set; }
 
-        public AbstractWork WorkInfo { get; set; }
+        public AbstractWork AbstractWork { get; set; }
         public List<Group> Groups { get; set; }
         public List<Evaluation> Evaluations { get; set; }
     }
