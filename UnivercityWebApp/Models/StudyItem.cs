@@ -9,10 +9,11 @@ namespace UnivercityWebApp.Models
         public StudyType StudyType { get; set; }
 
         public int TeacherId { get; set; }
+        public int DirectionId { get; set; }
 
-        //public List<Group> Groups { get; set; }
-        public List<AbstractWork> Works { get; set; }
         public Teacher Teacher { get; set; }
+        public Direction Direction { get; set; }
+        public List<Work> Works { get; set; }
     }
 
     public enum StudyType

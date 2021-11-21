@@ -6,7 +6,6 @@ namespace UnivercityWebApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<AbstractWork> AbstractWorks { get; set; }
         public DbSet<Direction> Directions { get; set; }
         public DbSet<Evaluation> Evaluations { get; set; }
         public DbSet<Group> Groups { get; set; }

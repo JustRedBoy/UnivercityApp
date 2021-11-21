@@ -8,5 +8,6 @@ namespace UnivercityWebApp.Models
         public string Name { get; set; }
 
         public List<Group> Groups { get; set; }
+        public List<StudyItem> StudyItems { get; set; }
     }
 }
