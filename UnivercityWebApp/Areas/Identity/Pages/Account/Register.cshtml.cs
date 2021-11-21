@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using UnivercityWebApp.Data;
 using UnivercityWebApp.Models;
 
 namespace UnivercityWebApp.Areas.Identity.Pages.Account
@@ -15,15 +16,18 @@ namespace UnivercityWebApp.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger)
+            ILogger<RegisterModel> logger,
+            ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         [BindProperty]
@@ -94,6 +98,25 @@ namespace UnivercityWebApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    if (user.IsTeacher)
+                    {
+                        await _userManager.AddToRoleAsync(user, "teacher");
+                        await _dbContext.Teachers.AddAsync(new Teacher()
+                        {
+                            ApplicationUserId = user.Id,
+                            Position = "Professor"
+                        });
+                    }
+                    else 
+                    {
+                        await _userManager.AddToRoleAsync(user, "student");
+                        await _dbContext.Students.AddAsync(new Student()
+                        {
+                            ApplicationUserId = user.Id,
+                            GroupId = 1 // bug
+                        });
+                    }
+                    await _dbContext.SaveChangesAsync();
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }

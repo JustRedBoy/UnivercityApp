@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Study Items";
+}
+
+<h2>List of your study items :</h2>
+<a asp-controller="StudyItem" asp-action="Add">Add new study item</a>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.StudyItems)
+    {
+        <tr>
+            <td><a asp-controller="StudyItem" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></td>
+            <td>@item.StudyType</td>
+            <td><a asp-controller="StudyItem" asp-action="Edit" asp-route-id="@item.Id">Edit</a> | <a asp-controller="StudyItem" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+        </tr>
+    }
+</table>

@@ -5,6 +5,8 @@ using UnivercityWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using UnivercityWebApp.ViewModels;
+using UnivercityWebApp.Data;
+using System.Linq;
 
 namespace UnivercityWebApp.Controllers
 {
@@ -12,22 +14,32 @@ namespace UnivercityWebApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
-        public HomeController(UserManager<ApplicationUser> userManager, ILogger<HomeController> logger)
+        public HomeController(UserManager<ApplicationUser> userManager, 
+            ILogger<HomeController> logger,
+            ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public async Task<IActionResult> Index()
         {
-            var userId = _userManager.GetUserId(User);
-            //var user = await _userManager.GetUserAsync(User);
-            //var user = await _userManager.FindByIdAsync(userId);
-            //var user = _httpContextAccessor.Context?.User; (service IHttpContextAccessor)
-
-            //await _roleManager.CreateAsync(new IdentityRole("Student"));
-            //await _roleManager.CreateAsync(new IdentityRole("Teacher"));
+            string id = _userManager.GetUserId(User);
+            if (User != null && User.IsInRole("admin"))
+            {
+                //
+            }
+            else if (User != null && User.IsInRole("teacher"))
+            {
+                return RedirectToAction("Manage", "StudyItem");
+            }
+            else if (User != null && User.IsInRole("student"))
+            {
+                //
+            }
 
             return View();
         }
