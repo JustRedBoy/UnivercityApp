@@ -13,7 +13,7 @@ namespace UnivercityWebApp.Models
         public double MaxRate { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime DueDate { get; set; }
-        public bool Hidden { get; set; }
+        //public bool Hidden { get; set; }
 
         public int StudyItemId { get; set; }
 

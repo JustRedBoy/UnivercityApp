@@ -3,10 +3,8 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using UnivercityWebApp.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 using UnivercityWebApp.ViewModels;
 using UnivercityWebApp.Data;
-using System.Linq;
 
 namespace UnivercityWebApp.Controllers
 {
@@ -25,7 +23,7 @@ namespace UnivercityWebApp.Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             string id = _userManager.GetUserId(User);
             if (User != null && User.IsInRole("admin"))

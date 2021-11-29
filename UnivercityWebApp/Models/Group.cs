@@ -12,6 +12,7 @@ namespace UnivercityWebApp.Models
         public int TeacherId { get; set; }
 
         public List<Student> Students { get; set; }
+        public List<StudyItem> StudyItems { get; set; }
         public Direction Direction { get; set; }
         public Teacher Curator { get; set; }
     }
